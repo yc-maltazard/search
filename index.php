@@ -76,7 +76,7 @@
             <?php if($Searching){ ?>
                 <a class="pure-button button-secondary" href="/">Back</a>       
             <?php } ?>
-
+            <a class="pure-button" target="_blank" href="https://github.com/rrkelee/search">Github</a> 
         </form>
 
         <?php if($Searching){ ?>
