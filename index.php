@@ -100,7 +100,7 @@
                         e.preventDefault();
                         go();
                     }
-                    if (e.which === 27) {
+                    if (e.which === 27 && location.pathname != "/" ) {
                         location.href = "/";
                     }
                 });
