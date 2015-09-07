@@ -18,15 +18,13 @@
     ); 
 
     $q = isset( $_GET[ 'q'] ) ? $_GET[ 'q'] : '' ; 
-    $siteid = isset( $_GET['siteid'] ) && isset( $sites[intval($_GET[ 'siteid'])] ) ? intval($_GET[ 'siteid']) : 0 ; 
-    
-    if($q){ 
-        $url = str_replace("{q}", $q, $sites[$siteid]['url']);
-        $Searching = 'searching';
-    }else{
-        $url = 'about:blank'; 
-        $Searching = 'notsearching';
-    } 
+
+    $siteid = isset( $_GET['siteid'] ) && isset( $sites[intval($_GET[ 'siteid'])] ) ? intval($_GET[ 'siteid']) : 0 ;
+
+    $url = $q ? str_replace("{q}", $q, $sites[$siteid]['url']) : 'about:blank';
+
+    $Searching = !!$q;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,11 +41,10 @@
             *{margin: 0; padding: 0; } 
             body{overflow: hidden; height: 100%;min-width: 1000px;  } 
             #frame { width: 100%; position: fixed; top:60px; border: 0; border:none; z-index: 7; } 
-            #top{background: #eee; width: 100%; text-align: center; position: fixed; top: 0px; height: 60px; z-index: 7; line-height: 60px; } 
+            #top{background: #eee; width: 100%; text-align: center; position: fixed; top: 0px; height: 60px; z-index: 7; line-height: 60px;  <?php if(!$Searching){ echo "background:none;top:40%;"; } ?> } 
             #site{ display: inline-block; }
             #q{ display: inline-block;width:300px; }
-            #go{ display: inline-block; }
-            #notsearching #top{ background:none;top:40%; }        
+            #go{ display: inline-block; }      
             .button-secondary {
                 background: rgb(66, 184, 221);
                 color: white;
@@ -57,7 +54,7 @@
         </style>
     </head>
     
-    <body id="<?php echo $Searching; ?>">
+    <body>
 
         <form class="pure-form" method="get" action="?" id="top" autocomplete="off">
         
@@ -76,13 +73,13 @@
             <input type="text" id="q" name="q" autocomplete="off" value="<?php echo $q; ?>">
             <button type="submit" id="go" class="pure-button pure-button-primary">Go</button>
 
-            <?php if($Searching == 'searching'){ ?>
+            <?php if($Searching){ ?>
                 <a class="pure-button button-secondary" href="/">Back</a>       
             <?php } ?>
 
         </form>
 
-        <?php if($Searching == 'searching'){ ?>
+        <?php if($Searching){ ?>
             <iframe id="frame" src="<?php echo $url; ?>"></iframe>
         <?php } ?>
 
@@ -90,7 +87,7 @@
         </script>
         <script>
             $(document).ready(function() {
-                
+
                 var go = function() {
                     if( $('#q').val() ){
                         $('#top').submit();
@@ -110,7 +107,7 @@
                     }
                 });
 
-                <?php if($Searching == 'searching'){ ?>
+                <?php if($Searching){ ?>
                 var _resize = function() {
                     var h = $(window).height() - 60;
                     $("#frame").css({
