@@ -31,8 +31,8 @@
     
     <head>
         <meta charset="utf-8">
-        <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
-        <link rel="bookmark" type="image/x-icon" href="./favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="bookmark" type="image/x-icon" href="/favicon.ico" />
         <title>
             Search
         </title>
@@ -99,6 +99,9 @@
                     if (e.which === 13) {
                         e.preventDefault();
                         go();
+                    }
+                    if (e.which === 27) {
+                        location.href = "/";
                     }
                 });
 
