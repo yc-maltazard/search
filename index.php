@@ -45,12 +45,7 @@
             #site{ display: inline-block; }
             #q{ display: inline-block;width:300px; }
             #go{ display: inline-block; }      
-            .button-secondary {
-                background: rgb(66, 184, 221);
-                color: white;
-                border-radius: 4px;
-                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-            }
+            .button-secondary { background: rgb(66, 184, 221); color: white; border-radius: 4px; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); }
         </style>
     </head>
     
